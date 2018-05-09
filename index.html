@@ -2,14 +2,32 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <!-- <title>Hello World!</title> -->
   </head>
-  <body>
-    <h1>Hello World!</h1>
+  <body style="-webkit-app-region:drag;opacity: 1.0;">
+    <h1>Electron App</h1>
     <!-- All of the Node.js APIs are available in this renderer process. -->
     We are using Node.js <script>document.write(process.versions.node)</script>,
+    <br>
     Chromium <script>document.write(process.versions.chrome)</script>,
+    <br>
     and Electron <script>document.write(process.versions.electron)</script>
+    <br>
+    OS architecture: <script>document.write(process.arch)</script>
+    <br>
+    OS version: <script>document.write(process.platform)</script>
+ 
+    <p>Added a global key to refresh, hit F5 to reload the window</p>
+ 
+     <p>Simple Message from the user of electron! Wow way to go</p>
+     <div>
+       <p id="myText"></p>
+      <button id="myButton">Simple Button</button>
+     </div>
+
+
+
+
   </body>
 
   <script>

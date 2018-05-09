@@ -1,12 +1,17 @@
-import { app, BrowserWindow, globalShortcut } from "electron";
+import { app, BrowserWindow, globalShortcut, Menu } from "electron";
 import * as path from "path";
 import * as url from "url";
+
+//import the template
+import { template as mgTemplate, AddMenuBringToFront as mgAddMenuBringToFront } from "./menuTemplate";
+
+
 
 
 require("dotenv").config();
 
-
-  console.log(`Your current directory is: ${__dirname}`);
+//console.log("I am in main3");
+//console.log(`Your current directory is: ${__dirname}`);
 // //electron reload for debug mode
 // require('electron-reload')([__dirname,
 //     `${__dirname}/*.js}`], {
@@ -14,10 +19,19 @@ require("dotenv").config();
 //   hardResetMethod: 'quit'
 // });
 
-require('electron-reload')([__dirname,
-  `${__dirname}/*.js`],{
-  electron: require(`${modifyPath()}/node_modules/electron`)
-})
+// require('electron-reload')([__dirname,
+//   `${__dirname}/*.js`],{
+//   electron: require(`${modifyPath()}/node_modules/electron`)
+// })
+
+// try {
+//   require('electron-reloader')(module);
+
+// } catch (error) {
+
+// }
+
+
 
 
 
@@ -38,12 +52,22 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
+    show: false,
+    //backgroundColor: "#3afff5",
+    center: true,
+    minWidth: 800,
+    minHeight: 600,
+    // fullscreen:false,
+    title: "Michael's Home Page"
+    //frame:false,
+    //titleBarStyle: "hidden"
   });
 
+
   //reload on key press
-  globalShortcut.register('f5',()=>{
-       //console.log('Refresh the main window');
-       mainWindow.reload();
+  globalShortcut.register('f5', () => {
+    //console.log('Refresh the main window');
+    mainWindow.reload();
   });
 
 
@@ -74,12 +98,72 @@ function createWindow() {
 
     mainWindow = null;
   });
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
+  });
+
 }
+
+
+
+
+
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+app.on("ready", () => {
+  //Create a windows menu
+  // let template = [{
+  //   label: 'File',
+  //   submenu: [{
+  //     label: 'Close App(With Role)',
+  //     accelerator: 'CmdOrCtrl+X',
+  //     role: 'quit'
+
+  //   }, { type: 'separator' },
+  //   {
+  //     label: 'Reload Window',
+  //     accelerator: 'F6',
+  //     role: 'reload'
+  //   },
+  //   {
+  //     label: 'Close app with Function',
+  //     click: () => {
+  //       app.quit();
+  //     }
+  //   }
+  //   ]
+  // },
+  // {
+  //   label: "Testing",
+  //   submenu: [{
+  //     label: 'Item 1',
+  //     type: 'checkbox',
+  //     checked: false,
+  //     click: () => {
+  //       //let menu = Menu.getApplicationMenu();
+  //       //console.log(menu.items[1].submenu.items[0].checked);
+  //     }
+  //   }, {
+  //     label: 'Item 2',
+  //     type: 'checkbox',
+  //     checked: false
+  //   }
+  //   ]
+  // }
+  // ];
+
+ 
+  
+  mgAddMenuBringToFront(mgTemplate,1);
+
+  const menu = Menu.buildFromTemplate(<any>mgTemplate);
+  Menu.setApplicationMenu(menu);
+  createWindow();
+});
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
