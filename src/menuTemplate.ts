@@ -1,5 +1,5 @@
 //This is a menu template
-import { Menu, BrowserWindow, MenuItemConstructorOptions } from 'electron';
+import { Menu, BrowserWindow, MenuItemConstructorOptions, MenuItem } from 'electron';
 
 let electron = require("electron");
 let app: any;
@@ -127,3 +127,19 @@ export function AddMenuBringToFront(template: Array<any>, index: number) {
             role: 'front'
         });
 }
+
+//Create a contextmenu for the app
+export function CreateContextMenu(){
+    
+    const contextMenu = new Menu();
+    contextMenu.append(new MenuItem({label:'Cut',role:'cut'}));
+    contextMenu.append(new MenuItem({label:'Copy',role:'copy'}));
+    contextMenu.append(new MenuItem({label:'Paste',role:'paste'}));
+    contextMenu.append(new MenuItem({label:'Select All',role:'selectall'}));
+    contextMenu.append(new MenuItem({type:"separator"}));
+    contextMenu.append(new MenuItem({label:"Custom",click:()=>{console.log('Coming from IPC!')}}));
+    
+    return(contextMenu);
+
+}
+

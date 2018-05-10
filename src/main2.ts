@@ -1,9 +1,9 @@
-import { app, BrowserWindow, globalShortcut, Menu } from "electron";
+import { app, BrowserWindow, globalShortcut, Menu, MenuItem, ipcMain } from "electron";
 import * as path from "path";
 import * as url from "url";
 
 //import the template
-import { template as mgTemplate, AddMenuBringToFront as mgAddMenuBringToFront } from "./menuTemplate";
+import { template as mgTemplate, AddMenuBringToFront as mgAddMenuBringToFront, CreateContextMenu } from "./menuTemplate";
 
 
 
@@ -32,10 +32,8 @@ require("dotenv").config();
 // }
 
 
-
-
-
 let mainWindow: Electron.BrowserWindow;
+let contextMenu: Menu;
 
 function modifyPath() {
 
@@ -106,11 +104,6 @@ function createWindow() {
 }
 
 
-
-
-
-
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -156,12 +149,14 @@ app.on("ready", () => {
   // }
   // ];
 
- 
-  
-  mgAddMenuBringToFront(mgTemplate,1);
 
+
+  mgAddMenuBringToFront(mgTemplate, 1);
   const menu = Menu.buildFromTemplate(<any>mgTemplate);
   Menu.setApplicationMenu(menu);
+
+  contextMenu = CreateContextMenu()
+
   createWindow();
 });
 
@@ -184,3 +179,22 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+
+
+
+
+ipcMain.on("show-context-menu", (event: any) => {
+
+
+  const win = BrowserWindow.fromWebContents(event.sender);
+
+  //send message to window
+  win.webContents.send('message', { data: 'Wow this is way too cool from main process' });
+
+  contextMenu.popup(win);
+
+});
+
+
+
