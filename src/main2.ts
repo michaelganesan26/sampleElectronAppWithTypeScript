@@ -1,4 +1,4 @@
-import { app, BrowserWindow, globalShortcut, Menu, MenuItem, ipcMain } from "electron";
+import { app, BrowserWindow, globalShortcut, Menu, MenuItem, ipcMain, Dialog } from "electron";
 import * as path from "path";
 import * as url from "url";
 
@@ -203,11 +203,11 @@ ipcMain.on("show-context-menu", (event: any) => {
 
 //Main message from 
 
-ipcMain.on("pingMessage",(event:any,msg:string)=>{
+ipcMain.on("pingMessage", (event: any, msg: string) => {
 
-   console.log(`Received ping message from client! ${msg}`);
-   //always send the channel for the reply! 
-   event.sender.send('pingMessageReply',`Received your message from the server: ${new Date().toUTCString()}`);
+  console.log(`Received ping message from client! ${msg}`);
+  //always send the channel for the reply! 
+  event.sender.send('pingMessageReply', `Received your message from the server: ${new Date().toUTCString()}`);
 
 
 
