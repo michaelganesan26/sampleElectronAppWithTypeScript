@@ -32,6 +32,29 @@ ipcRenderer.on("message",(event:any,message:any)=>{
     console.log(`Your message is: ${message.data} coming from main process!`);
 });
 
+//ping main process
+jquery('#sendAsyncMessage').click((event:any)=>{
+
+   let msg = new Date().toUTCString();
+   ipcRenderer.send("pingMessage", `Ping message from client ${msg}`);
+
+});
+
+ipcRenderer.on("pingMessageReply",(event:any,msg:any)=>{
+   console.log(`Received message from server ${msg}`);
+   jquery("#asyncReply").html(`Ping Results from Main ${msg}`);
+
+});
+
+
+
+
+
+
+
+
+
+
 
 
 

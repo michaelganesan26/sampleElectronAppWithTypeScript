@@ -93,8 +93,13 @@ function createWindow() {
 
     //Unregister the ky 
     globalShortcut.unregister("f5");
-
     mainWindow = null;
+
+    //remove the ipcMain listeners
+    ipcMain.removeAllListeners("pingMessage");
+    ipcMain.removeAllListeners("show-context-menu");
+
+
   });
 
   mainWindow.once("ready-to-show", () => {
@@ -196,5 +201,15 @@ ipcMain.on("show-context-menu", (event: any) => {
 
 });
 
+//Main message from 
 
+ipcMain.on("pingMessage",(event:any,msg:string)=>{
+
+   console.log(`Received ping message from client! ${msg}`);
+   //always send the channel for the reply! 
+   event.sender.send('pingMessageReply',`Received your message from the server: ${new Date().toUTCString()}`);
+
+
+
+});
 
