@@ -1,4 +1,4 @@
-import { app, BrowserWindow, globalShortcut, Menu, MenuItem, ipcMain, Dialog } from "electron";
+import { app, BrowserWindow, globalShortcut, Menu, MenuItem, ipcMain, Dialog, dialog } from "electron";
 import * as path from "path";
 import * as url from "url";
 
@@ -213,3 +213,17 @@ ipcMain.on("pingMessage", (event: any, msg: string) => {
 
 });
 
+
+//Show dialog
+ipcMain.on("open-directory-dialog",(event:any)=>{
+
+     console.log('Open your file dialog!');
+
+     dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']},(files:any)=>{
+
+       if(files){
+        event.sender.send('selectedItem',files);
+       }
+     });
+
+});

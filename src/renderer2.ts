@@ -46,7 +46,26 @@ ipcRenderer.on("pingMessageReply",(event:any,msg:any)=>{
 
 });
 
+//Show dialog 
+const selectDirBtn = document.getElementById("btnselectDirectory");
 
+selectDirBtn.addEventListener("click",(event:any)=>{
+
+  ipcRenderer.send("open-directory-dialog");
+
+
+
+});
+
+ipcRenderer.on("selectedItem",(event:any,files:any)=>{
+   console.log('Open file dialog');
+
+   document.getElementById("selectedItem").innerHTML = `You selected: ${files}`;
+
+
+
+
+});
 
 
 

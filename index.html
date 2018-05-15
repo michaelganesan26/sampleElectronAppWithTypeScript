@@ -1,40 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- <title>Hello World!</title> -->
-  </head>
-  <body style="-webkit-app-region:drag;opacity: 1.0;">
-    <h1>Electron App</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    <br>
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    <br>
-    and Electron <script>document.write(process.versions.electron)</script>
-    <br>
-    OS architecture: <script>document.write(process.arch)</script>
-    <br>
-    OS version: <script>document.write(process.platform)</script>
- 
-    <p>Added a global key to refresh, hit F5 to reload the window</p>
- 
-     <p>Simple Message from the user of electron! Wow way to go</p>
-     <div>
-       <p id="myText"></p>
-      <button id="myButton">Simple Button</button>
-     </div>
-    <br>
-    <div>
-       <button id="sendAsyncMessage">Ping Main Process</button>
-       <p id="asyncReply">
-       </p>
-    </div>
 
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <!-- <title>Hello World!</title> -->
 
-  <script>
-    // You can also require other files to run in this process
-    require('./dist/renderer2.js')
-  </script>
+  <style>
+    button .dlgButton {
+      color: rebeccapurple;
+      font-family: sans-serif;
+      font-weight: bold;
+      padding: 0.5rem;
+      background-color: #ccc;
+      box-shadow: 2px 2px 2px #ccc;
+      display: block;
+      margin: 1em;
+
+    }
+
+    textarea .dglText {
+      width: 60%;
+    }
+
+  </style>
+
+
+</head>
+
+<body style="-webkit-app-region:drag;opacity: 1.0;">
+  <h1>Electron App</h1>
+  <!-- All of the Node.js APIs are available in this renderer process. -->
+  We are using Node.js
+  <script>document.write(process.versions.node)</script>,
+  <br> Chromium
+  <script>document.write(process.versions.chrome)</script>,
+  <br> and Electron
+  <script>document.write(process.versions.electron)</script>
+  <br> OS architecture:
+  <script>document.write(process.arch)</script>
+  <br> OS version:
+  <script>document.write(process.platform)</script>
+
+  <p>Added a global key to refresh, hit F5 to reload the window</p>
+
+  <p>Simple Message from the user of electron! Wow way to go</p>
+  <div>
+    <p id="myText"></p>
+    <button id="myButton">Simple Button</button>
+  </div>
+  <br>
+  <div>
+    <button id="sendAsyncMessage">Ping Main Process</button>
+    <p id="asyncReply">
+    </p>
+  </div>
+  <h3>Open a file dialog</h3>
+  <div>
+    <button id="btnselectDirectory" class="dlgButton">Choose a directory</button>
+    <br>
+    <textarea id="selectedItem" cols="30" rows="10" class="dglText"></textarea>
+  </div>
+
+
+
+</body>
+
+<script>
+  // You can also require other files to run in this process
+  require('./dist/renderer2.js')
+</script>
+
 </html>
