@@ -215,15 +215,22 @@ ipcMain.on("pingMessage", (event: any, msg: string) => {
 
 
 //Show dialog
-ipcMain.on("open-directory-dialog",(event:any)=>{
+ipcMain.on("open-directory-dialog", (event: any) => {
 
-     console.log('Open your file dialog!');
+  console.log('Open your file dialog!');
 
-     dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']},(files:any)=>{
+  dialog.showOpenDialog(
+    {
+      properties: ['openFile', 'openDirectory', 'multiSelections'],
+      title: 'Music File!'
+    },
+    (files: any) => {
 
-       if(files){
-        event.sender.send('selectedItem',files);
-       }
-     });
+      if (files) {
+        event.sender.send('selectedItem', files);
+      }
+    });
 
 });
+
+

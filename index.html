@@ -6,7 +6,7 @@
   <!-- <title>Hello World!</title> -->
 
   <style>
-    button .dlgButton {
+    button.dlgButton {
       color: rebeccapurple;
       font-family: sans-serif;
       font-weight: bold;
@@ -18,8 +18,19 @@
 
     }
 
-    textarea .dglText {
+    textarea.dglText {
       width: 60%;
+    }
+
+    textarea.webDlg {
+      margin-top: 10px;
+      width: 70%;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      font-style: italic;
+      background-color:rgb(185, 130, 240);
+      color:white;
     }
 
   </style>
@@ -57,12 +68,19 @@
   <h3>Open a file dialog</h3>
   <div>
     <button id="btnselectDirectory" class="dlgButton">Choose a directory</button>
-    <br>
-    <textarea id="selectedItem" cols="30" rows="10" class="dglText"></textarea>
+    <br/>
+    <textarea id="selectedItem" cols="30" rows="10" class="dglText" style="margin-top: 10px"></textarea>
   </div>
-
-
-
+<div>
+  <h3>Open the dialog from the current page</h3>
+  <button id="btnOpenFileDialog"> Open File Dialog</button>
+  <br>
+  <textarea class = "webDlg" name="selectedPath" id="selectedPath" cols="30" rows="10"></textarea>
+</div>
+<div>
+  <h3>Show the Message Box</h3>
+ <button id="btnShowMessageBox">Show Message Box</button>
+</div>
 </body>
 
 <script>
